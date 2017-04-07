@@ -1,18 +1,39 @@
 import React from 'react'
 
-const Results = (props) => (
-        (
-          <div id="results">
-            {
-              props.results.length == 1 ? null : <div><button id="homeButton" onReset={props.handleReset} className="initiallyHidden searchAgainButton">Search Again</button>
-              <button id="previousButton" className="initiallyHidden leftbtn" onhandleDec={props.onDec}><i className="fa fa-chevron-left" aria-hidden="true" ></i></button>
-              <button id="nextButton"  className="initiallyHidden rightbtn" onhandleInc={props.onInc} ><i className="fa fa-chevron-right" aria-hidden="true"></i></button>
-              <h3 id="displayAddress"></h3></div>
-            }
-            <h2 id="displayText">{props.results[props.currentIndex].phrase}</h2>
-          </div>
-    )
 
-)
+
+class Results extends React.Component {
+
+  buttonDisplays() {
+    if (this.props.currentIndex === 1) {
+      return <button id="nextButton"  className="rightbtn" onClick={this.props.onInc} ><i className="fa fa-chevron-right" aria-hidden="true"></i> </button>
+    } else if (this.props.currentIndex === 5) {
+      return <button id="previousButton" className="leftbtn" onClick={this.props.onDec}><i className="fa fa-chevron-left" aria-hidden="true" ></i></button>
+    } else {
+      return (
+        <div>
+          <button id="previousButton" className="leftbtn" onClick={this.props.onDec}><i className="fa fa-chevron-left" aria-hidden="true" ></i></button>
+          <button id="nextButton"  className="rightbtn" onClick={this.props.onInc} ><i className="fa fa-chevron-right" aria-hidden="true"></i> </button>
+        </div>
+      )
+    }
+  }
+        render() {
+           return (
+          <div>
+            {
+              this.props.results.length == 1 ? null :
+              <div id="results">
+                <button id="homeButton" onClick={this.props.onReset} className="searchAgainButton">Search Again</button>
+                {this.buttonDisplays()}
+                <h3 id="displayAddress">{this.props.searchAddress}</h3></div>
+            }
+            <h2 id="displayText">{this.props.results[this.props.currentIndex].phrase}</h2>
+          </div>
+        ) }
+
+}
+
+
 
 export default Results;

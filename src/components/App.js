@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../assets/App.css';
+import '../assets/index.css'
+import '../assets/running_man.css'
 import SearchForm from './SearchForm'
 import Results from './Results'
 const API_KEY = "Y6VozHmxn5OcKm1lkM47LtueW16Uw5GS"
@@ -37,6 +39,8 @@ class App extends Component {
       errorMessage: ""
     })
   }
+
+
   handleSubmit(ev) {
     ev.preventDefault()
     this.getLocationKey(this.state.query)
@@ -52,14 +56,14 @@ class App extends Component {
   handleInc(ev) {
     ev.preventDefault()
     this.setState({
-      currentIndex: this.state.currentIndex++
+      currentIndex: this.state.currentIndex + 1
     })
   }
 
   handleDec(ev) {
     ev.preventDefault()
     this.setState({
-      currentIndex: this.state.currentIndex--
+      currentIndex: this.state.currentIndex - 1
     })
   }
 
@@ -160,18 +164,19 @@ class App extends Component {
         let formatted = this.formattedDate(obj)
         let described = this.generateDescription(formatted)
         this.setState({results: [...this.state.results,described]})
-        (this.state.results.length === 6)
+        if (this.state.results.length === 6) {
            this.setState({
              currentIndex: 1
            })
+         }
     }
 
 
   render() {
     return (
       <div>
-      <SearchForm onChange={this.handleChange} onSubmit={this.handleSubmit}/>
-      <Results results={this.state.results} handleReset={this.handleReset} currentIndex={this.state.currentIndex} searchAddress={this.state.searchAddress} onInc={this.handleInc} onDec={this.handleDec}/>
+      <SearchForm onChange={this.handleChange} onSubmit={this.handleSubmit} results={this.state.results}/>
+      <Results results={this.state.results} handleReset={this.handleReset} currentIndex={this.state.currentIndex} searchAddress={this.state.searchAddress} onInc={this.handleInc} onDec={this.handleDec} onReset={this.handleReset}/>
       </div>
     );
   }
