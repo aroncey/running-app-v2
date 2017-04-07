@@ -28,7 +28,7 @@ class Results extends React.Component {
                 {this.buttonDisplays()}
                 <h3 id="displayAddress">{this.props.searchAddress}</h3></div>
             }
-            <h2 id="displayText">{this.props.results[this.props.currentIndex].phrase}</h2>
+            <h2 className="first_message">{this.props.results[this.props.currentIndex].phrase}</h2>
           </div>
         ) }
 
