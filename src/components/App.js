@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../assets/App.css';
 import SearchForm from './SearchForm'
+import Results from './Results'
 const API_KEY = "Y6VozHmxn5OcKm1lkM47LtueW16Uw5GS"
+const introObject = new Object({phrase: "Plan your week's running schedule with Accuweather's running index"})
+
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
       query: '',
-      results: ["Plan your week's running schedule with Accuweather's running index"],
+      results: [introObject],
       currentIndex: 0,
       searchAddress: "",
       errorMessage: ""
@@ -18,11 +21,22 @@ class App extends Component {
     this.handleChange = this.handleChange.bind(this)
     this.handleInc = this.handleInc.bind(this)
     this.handleDec = this.handleDec.bind(this)
+    this.handleReset = this.handleReset.bind(this)
     this.generateDescription = this.generateDescription.bind(this)
     this.formattedDate = this.formattedDate.bind(this)
     this.forecastBuilder = this.forecastBuilder.bind(this)
   }
 
+  handleReset(ev) {
+    ev.preventDefault()
+    this.setState({
+      query: '',
+      results: [introObject],
+      currentIndex: 0,
+      searchAddress: "",
+      errorMessage: ""
+    })
+  }
   handleSubmit(ev) {
     ev.preventDefault()
     this.getLocationKey(this.state.query)
@@ -145,15 +159,23 @@ class App extends Component {
         obj.date = date
         let formatted = this.formattedDate(obj)
         let described = this.generateDescription(formatted)
-        this.setState({result: [...this.state.results,described]})
+        this.setState({results: [...this.state.results,described]})
+        (this.state.results.length === 6)
+           this.setState({
+             currentIndex: 1
+           })
     }
 
 
   render() {
     return (
+      <div>
       <SearchForm onChange={this.handleChange} onSubmit={this.handleSubmit}/>
+      <Results results={this.state.results} handleReset={this.handleReset} currentIndex={this.state.currentIndex} searchAddress={this.state.searchAddress} onInc={this.handleInc} onDec={this.handleDec}/>
+      </div>
     );
   }
+
 }
 
 export default App;
