@@ -6,6 +6,7 @@ import '../assets/running_man.css'
 import SearchForm from './SearchForm'
 import Results from './Results'
 const API_KEY = "Y6VozHmxn5OcKm1lkM47LtueW16Uw5GS"
+
 const introObject = new Object({phrase: "Plan your week's running schedule with Accuweather's running index"})
 
 
@@ -139,7 +140,7 @@ class App extends Component {
                   object.phrase = `The weather will be out of this world ${object.dayName}!!!!`
                   break;
             default:
-                alert("meeeeeh");
+                alert("Not great");
                 break;
             }
             return object

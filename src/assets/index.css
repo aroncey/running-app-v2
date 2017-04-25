@@ -34,7 +34,7 @@
 .searchBar {
   position: absolute;
   left: 50%;
-  bottom: 38%;
+  bottom: 25%;
   transform: translateX(-50%);
   width: 400px;
   height: 50px;
@@ -48,7 +48,7 @@
 .searchButton {
   position: absolute;
   left: 50%;
-  bottom: 30%;
+  bottom: 19%;
   transform: translateX(-50%);
 
 

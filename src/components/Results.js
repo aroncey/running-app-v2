@@ -24,11 +24,12 @@ class Results extends React.Component {
             {
               this.props.results.length == 1 ? null :
               <div id="results">
-                <button id="homeButton" onClick={this.props.onReset} className="searchAgainButton">Search Again</button>
-                {this.buttonDisplays()}
-                <h3 id="displayAddress">{this.props.searchAddress}</h3></div>
+                  <button id="homeButton" onClick={this.props.onReset} className="searchAgainButton">Search Again</button>
+                  {this.buttonDisplays()}
+                  <h3 id="displayAddress">{this.props.searchAddress}</h3>
+              </div>
             }
-            <h2 id="displayText">{this.props.results[this.props.currentIndex].phrase}</h2>
+            <h2  id="displayText">{this.props.results[this.props.currentIndex].phrase}</h2>
           </div>
         ) }
 
